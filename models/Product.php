@@ -48,7 +48,6 @@ class Product {
             $productList[$i]['preview_image'] = $row['preview_image'];
             $productList[$i]['date'] = $row['date'];
             $productList[$i]['name_author'] = $row['name_author'];
-            // $productList[$i]['count_reviews'] = $row['count_reviews'];
             $i++;
         }
         
@@ -61,19 +60,19 @@ class Product {
     
     public static function saveProduct($data) {
         
-            $db = Db::getConnection();
+        $db = Db::getConnection();
 
-              // переменные для вставки в БД 
-            $title = isset($data['title']) ? $data['title'] : '';
-            $preview_image = isset($data['image']) ? $data['image'] : '';
-            $price = isset($data['price']) ? $data['price'] : '';
-            $name_author = isset($data['nameAuthor']) ? $data['nameAuthor'] : '';
+        // переменные для вставки в БД 
+        $title = isset($data['title']) ? $data['title'] : '';
+        $preview_image = isset($data['image']) ? $data['image'] : '';
+        $price = isset($data['price']) ? $data['price'] : '';
+        $name_author = isset($data['nameAuthor']) ? $data['nameAuthor'] : '';
             
-            // подготовка строки 
-            $stmt = $db->prepare('INSERT INTO product (title, preview_image, name_author, price)'
+        // подготовка строки 
+        $stmt = $db->prepare('INSERT INTO product (title, preview_image, name_author, price)'
                     .'VALUES (:title, :preview_image, :name_author, :price)');
-            // запрос
-            $stmt->execute(array(':title' => $title, ':preview_image' => $preview_image,
+        // запрос
+        $stmt->execute(array(':title' => $title, ':preview_image' => $preview_image,
                 ':name_author' => $name_author, ':price' => $price));       
     }
 
@@ -98,25 +97,12 @@ class Product {
             $predicat = $data['author'];
         }
         
-//        echo $field;
-//        echo $predicat;
-      
         $productList = array();
 
-//        $stmt = $db->prepare('SELECT id, title, preview_image, date, name_author'
-//                . ' FROM product '
-//                . ' ORDER BY field=:field  predicat=:predicat');
-//      
-//        $stmt->execute(array(':field' => $field, ':predicat' => $predicat));
-
-//        $result = $stmt->fetchAll();
         $result = $db->query('SELECT id, title, preview_image, date, name_author'
                 .' FROM product '
                 .' ORDER BY '. $field .' '. $predicat);
-//        echo "<br>$result";
-//        die;
-//        
-        
+
         $i = 0;
         while ($row = $result->fetch()) {
             $productList[$i]['id'] = $row['id'];
@@ -124,11 +110,10 @@ class Product {
             $productList[$i]['preview_image'] = $row['preview_image'];
             $productList[$i]['date'] = $row['date'];
             $productList[$i]['name_author'] = $row['name_author'];
-            // $productList[$i]['count_reviews'] = $row['count_reviews'];
+
             $i++;
         }
-//        print_r($productList);
-//        die;
+        
         return $productList;
 
     }

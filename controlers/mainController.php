@@ -5,6 +5,7 @@
  *
  * @author Dmitriy
  */
+
 //Подключаю модель товаров для выборки всех товаров 
 if (file_exists(ROOT.'/models/Product.php'))
     include_once(ROOT.'/models/Product.php');
@@ -18,10 +19,8 @@ class mainController {
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
-          $productList = Product::getSortProductList($_POST); // добавить фильтрацию 
-          //
-          // если метод POST редирект на себя чтобы не было даблпоста
-//          header('Location: /');
+          $productList = Product::getSortProductList($_POST); // добавить фильтрацию данных
+
         }
         
         require_once ROOT.'/views/index.php';
