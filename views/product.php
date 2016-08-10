@@ -11,14 +11,15 @@
 	<div class="wrapper">
 		<header>
 			<h1 class="title">Агрегатор отзывов о товаре</h1>
-			<a href="#" class="btn"> Вернуться на главную </a>
+			<a href="/" class="btn"> Вернуться на главную </a>
 		</header>
 		<main>
 			<div class="info">
 				<p>Добавление товара</p>
 			</div>
 			<div class="content">
-					<form action="#">
+					<form action="/product" method="Post">
+						<!-- <p class="success"></p> -->
 						<span>*</span><input type="text" name="title" placeholder="Название товара">
 						<span>*</span><input type="text" name="image"  placeholder="Ссылка на фото">
 						<p class="info">обязательно в конце рассширение png,jpg,gif</p>

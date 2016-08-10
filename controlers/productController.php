@@ -11,12 +11,21 @@
 if (file_exists(ROOT.'/models/Product.php'))
     include_once(ROOT.'/models/Product.php');
 
+if (file_exists(ROOT.'/models/Comment.php'))
+    include_once(ROOT.'/models/Comment.php');
 
 class productController {
     
     public function actionIndex() {
-        echo '<br>actionIndex в productController ура';
-//        echo ROOT.'/models/Product.php';
+        // обработка формы 
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+          $result = Product::saveProduct($_POST);
+          // если метод POST редирект на себя чтобы не было даблпоста
+          header('Location:./product');
+        }
+        require_once ROOT.'/views/product.php';
         return true;
     }
     
@@ -24,26 +33,21 @@ class productController {
      * Метод для показа одного товара 
      */
     public function actionView($id) {
-//        echo "<br>Просмотр одного товара";
-//        echo "<br>".$id;  
-        
+
         if ($id) {
             $productItem = Product::getProductItemById($id);
-            
-//            echo '<pre>';
-//            print_r($productItem);
-//            echo '<pre>';
+        
+            $commentList = array();
+            $commentList = Comment::getCommentListById($id);
+
+            $avg = Comment::getAvgValue($id);
+
+            if (!isset($avg))
+              $avg = " пока нет";
+
             require_once ROOT.'/views/reviews.php';
-            
-//            echo 'actionView';
         }
         return true;
     }
-    /*
-     * метод обработки формы добавления товара
-     */
-    public function actionAdd() {
-        echo 'productController actionAdd ';
-        return true;
-    }
+    
 }

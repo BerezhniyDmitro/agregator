@@ -12,10 +12,17 @@ if (file_exists(ROOT.'/models/Product.php'))
 class mainController {
     
     public function actionIndex() {
-//        echo 'actionIndex в mainController (Главная)<br>';
-        
+    
         $productList = array();
         $productList = Product::getProductList();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+          $productList = Product::getSortProductList($_POST); // добавить фильтрацию 
+          //
+          // если метод POST редирект на себя чтобы не было даблпоста
+//          header('Location: /');
+        }
         
         require_once ROOT.'/views/index.php';
         

@@ -15,8 +15,18 @@
 			<a href="/product" class="btn"> Добавить новый товар </a>
 		</header>
 		<main>
-			<div class="info">
-				<p>блок сортировки</p>
+			<div class="info" style="margin-top: 50px">
+				<form class="btn-group" method="POST" action="/">
+					<button type="submit" name="title" value="ASC">Название от А-Я(Z) </button>	
+					<button type="submit" name="title" value="DESC">Название от А-Я(Z) </button>	
+
+					<button type="submit" name="date" value="ASC">По дате от стар к новым </button>	
+					<button type="submit" name="date" value="DESC">По дате от Новым к старым </button>
+
+					<button type="submit" name="author" value="ASC">Имя автора от А-Я(Z) </button>	
+					<button type="submit" name="author" value="DESC">Имя автора от А-Я(Z) </button>
+                                        <!-- по количеству коменнтариев -->
+				</form>
 			</div>
 			<div class="content">
 			
@@ -26,7 +36,7 @@
 						<table>
 							<tr>
 								<th>Название: </th>
-								<th><a href="<?= $productItem['id']; ?>"> <?= $productItem['title']; ?></a></th>
+								<th><a href="product/view/<?= $productItem['id']; ?>"> <?= $productItem['title']; ?></a></th>
 							</tr>
 							<tr>
 								<td>Дата добавления:</td>
@@ -38,7 +48,7 @@
 							</tr>
 							<tr>
 								<td>Кол-во отзывов:</td>
-								<td><?= $productItem['count_reviews']; ?></td>
+								<td>2</td>
 							</tr>
 						</table>
 					</div>
